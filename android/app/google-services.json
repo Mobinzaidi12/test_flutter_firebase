@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "472133318535",
+    "project_id": "fir-test-user-auth",
+    "storage_bucket": "fir-test-user-auth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472133318535:android:1391ccc4c9a4f48905c522",
+        "android_client_info": {
+          "package_name": "com.example.firebase_test_api"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj6bnjOP5hY13auky4fWyu3muk4emC6eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
