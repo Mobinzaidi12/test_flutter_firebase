@@ -1,7 +1,10 @@
+import 'package:firebase_test_api/pages/home_screen.dart';
 import 'package:firebase_test_api/pages/login.dart';
+import 'package:firebase_test_api/pages/wrapper_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,21 +13,20 @@ void main() async {
 }
 
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Login(),
-      ),
+      theme: ThemeData(useMaterial3: false),
+      initialRoute: '/',
+      routes: {
+        '/':(_)=> const WrapperScreen(),
+        '/home':(_)=> const HomeScreen(),
+        '/login':(_)=> const Login(),
+      },
     );
   }
 }

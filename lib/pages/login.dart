@@ -10,6 +10,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +28,10 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Login', style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold
                 ),),
-                SizedBox(height: 50,),
+                SizedBox(height: 60,),
                 Ui_Helper.customTextFiled('Email', Icons.email, false),
                 SizedBox(height: 30,),
                 Ui_Helper.customTextFiled('Password', Icons.lock, true),
@@ -34,12 +40,25 @@ class _LoginState extends State<Login> {
                   child: TextButton(onPressed: (){}, child: Text('Forgot Password?')),
                 ),
                 SizedBox(height: 20,),
-                Ui_Helper.customButton('Login', Colors.blue, Colors.white, Icons.login, (){
+                Ui_Helper.customButton('Login', Colors.blue, Colors.white, (){
 
                 }),
                 SizedBox(height: 20,),
-
-                
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don’t have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child:  Text(
+                        "Sign up",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Ui_Helper{
 
-  static customTextFiled(String text, IconData icon, bool obscureText){
+  static Widget customTextFiled(String text, IconData icon, bool obscureText){
     return TextField(
       obscureText: obscureText,
       decoration: InputDecoration(
@@ -16,8 +16,8 @@ class Ui_Helper{
     );
   }
 
-  static customButton(String text, Color color, Color textColor, IconData icon, VoidCallback? onPressed ){
-    return Container(
+  static Widget customButton(String text, Color color, Color textColor, VoidCallback? onPressed ){
+    return SizedBox(
      width: double.infinity,
      height: 50,
      child: ElevatedButton(
@@ -28,17 +28,10 @@ class Ui_Helper{
         )
       ),
       onPressed: onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: textColor,),
-          SizedBox(
-            width: 10,
-          ),
-          Text(text, style: TextStyle(color: textColor),),
-        ],
+      child: Center(
+        child:  Text(text, style: TextStyle(color: textColor, fontSize: 22),),
+      )
       ),
-     ),
     );
   }
 
