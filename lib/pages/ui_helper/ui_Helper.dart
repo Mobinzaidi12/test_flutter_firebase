@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class Ui_Helper{
 
-  static Widget customTextFiled(String text, IconData icon, bool obscureText){
-    return TextField(
+  static Widget customFormFiled(String text, IconData icon, bool obscureText, TextEditingController controller, String? Function(String?)? validator){
+    return TextFormField(
+      controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: Icon(icon),
@@ -13,6 +14,7 @@ class Ui_Helper{
           borderRadius: BorderRadius.circular(10)
         )
       ),
+      validator: validator,
     );
   }
 

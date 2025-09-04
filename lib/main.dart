@@ -1,5 +1,6 @@
 import 'package:firebase_test_api/pages/home_screen.dart';
 import 'package:firebase_test_api/pages/login.dart';
+import 'package:firebase_test_api/pages/signup.dart';
 import 'package:firebase_test_api/pages/wrapper_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/':(_)=> const WrapperScreen(),
         '/home':(_)=> const HomeScreen(),
         '/login':(_)=> const Login(),
+        '/signup':(_)=> const Signup(),
       },
     );
   }

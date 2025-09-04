@@ -1,14 +1,15 @@
-import 'package:firebase_test_api/pages/ui_helper/ui_Helper.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_test_api/pages/ui_helper/ui_Helper.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginState extends State<Login> {
+class _SignupState extends State<Signup> {
+  TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -28,27 +29,42 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'Signup',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 60),
+                  Ui_Helper.customFormFiled(
+                    'UserName',
+                    Icons.person,
+                    false,
+                    userNameController,
+                        (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter username';
+                      }
+                      if (value.length < 3) {
+                        return 'Username must be at least 3 characters';
+                      }
+                      return null;
+                    },
+
+                  ),
+                  SizedBox(height: 30),
                   Ui_Helper.customFormFiled(
                     'Email',
                     Icons.email,
                     false,
                     emailController,
-                      (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please enter email';
-                        }
-                        if(!value.contains('@') || !value.contains('.')){
-                          return 'Please enter a valid email';
-                        }
-                        return null;
+                        (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter email';
                       }
+                      if (!value.contains('@') || !value.contains('.')) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+
                   ),
                   SizedBox(height: 30),
                   Ui_Helper.customFormFiled(
@@ -56,15 +72,15 @@ class _LoginState extends State<Login> {
                     Icons.lock,
                     true,
                     passwordController,
-                      (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please enter password';
-                        }
-                        if(value.length < 6){
-                          return 'Password must be at least 6 characters';
-                        }
-                        return null;
+                        (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter password';
                       }
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters';
+                      }
+                      return null;
+                    },
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -87,10 +103,10 @@ class _LoginState extends State<Login> {
                       Text("Don’t have an account? "),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/signup');
+                          Navigator.pushNamed(context, '/login');
                         },
                         child: Text(
-                          "Sign up",
+                          "Login",
                           style: TextStyle(color: Colors.blue),
                         ),
                       ),
