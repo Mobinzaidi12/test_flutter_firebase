@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_test_api/pages/ui_helper/ui_Helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -14,6 +16,61 @@ class _SignupState extends State<Signup> {
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+
+
+
+  Future<void> _signUp() async {
+
+    if(_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      try{
+        var userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
+
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Account created successfully')),
+        );
+
+        Navigator.pushReplacementNamed(context, '/home');
+
+      }on FirebaseAuthException catch(e) {
+        String message;
+        switch (e.code) {
+          case 'email-already-in-use':
+            message =
+            'This email is already in use. Try logging in or use a different email.';
+            break;
+          case 'invalid-email':
+            message = 'Please enter a valid email address.';
+            break;
+          case 'weak-password':
+            message = 'Password is too weak. Please choose a stronger password.';
+            break;
+          default:
+            message = e.message ?? 'An unknown error occurred';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } finally{
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +147,13 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Ui_Helper.customButton(
-                    'Login',
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : Ui_Helper.customButton(
+                    'Signup',
                     Colors.blue,
                     Colors.white,
-                    () {},
+                    _signUp,
                   ),
                   SizedBox(height: 20),
                   Row(
